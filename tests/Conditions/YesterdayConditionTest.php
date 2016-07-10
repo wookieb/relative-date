@@ -6,9 +6,9 @@ use \DateTimeImmutable as D;
 use Wookieb\Conditions\YesterdayCondition;
 use Wookieb\DateDiffRequest;
 use Wookieb\DateDiffResult;
-use Wookieb\Tests\DateDiffRequestTestUtil;
+use Wookieb\Tests\AbstractTest;
 
-class YesterdayConditionTest extends \PHPUnit_Framework_TestCase
+class YesterdayConditionTest extends AbstractTest
 {
     public function cases()
     {

@@ -51,7 +51,7 @@ class Results
         return new DateDiffResult($request, self::YEARS_AGO, $request->getInterval()->y);
     }
 
-    public static function createFulLDate(DateDiffRequest $request)
+    public static function createFullDate(DateDiffRequest $request)
     {
         return DateDiffResult::createFullDate($request);
     }

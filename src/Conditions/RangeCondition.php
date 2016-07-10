@@ -43,4 +43,22 @@ class RangeCondition implements ConditionInterface
     {
         return call_user_func($this->formatCallback, $request);
     }
+
+    /**
+     * Flips min and max range and converts them to negative number;
+     *
+     * <code>
+     * new RangeCondition(10, 100, ...); // 10 <= x <= 100
+     * RangeCondition::createForNegativeValues(10, 100, ...); // -100 <= x <= -10
+     * </code>
+     *
+     * @param $min
+     * @param $max
+     * @param $formatCallback
+     * @return RangeCondition
+     */
+    public static function createForNegativeValues($min, $max, $formatCallback)
+    {
+        return new self(-$max, -$min, $formatCallback);
+    }
 }
