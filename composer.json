@@ -1,5 +1,5 @@
 {
-  "name": "wookieb/relative-time",
+  "name": "wookieb/relative-date",
   "description": "Fully configurable tool to calculate and show date diff in human readable form like \"2 minutes ago\" or \"10 minutes from now\".",
   "type": "library",
   "license": "MIT",
