@@ -22,15 +22,15 @@ class YesterdayCondition implements ConditionInterface
     {
         $yesterdayDate = \DateTimeImmutable::createFromFormat(
             'U',
-            $diffRequest->getDate()->format('U'),
-            $diffRequest->getDate()->getTimezone()
+            $diffRequest->getBaseDate()->format('U'),
+            $diffRequest->getBaseDate()->getTimezone()
         )->sub(new \DateInterval('P1D'));
 
-        return $yesterdayDate->format('Ymd') === $diffRequest->getBaseDate()->format('Ymd');
+        return $yesterdayDate->format('Ymd') === $diffRequest->getDate()->format('Ymd');
     }
 
-    public function createResult(DateDiffRequest $diffRequest)
+    public function createResult(DateDiffRequest $request)
     {
-        return new DateDiffResult(self::RESULT_NAME);
+        return new DateDiffResult($request, self::RESULT_NAME);
     }
 }

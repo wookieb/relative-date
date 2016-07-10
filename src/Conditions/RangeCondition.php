@@ -39,8 +39,8 @@ class RangeCondition implements ConditionInterface
         return $diffRequest->getDiffInSeconds() >= $this->min && $diffRequest->getDiffInSeconds() <= $this->max;
     }
 
-    public function createResult(DateDiffRequest $diffRequest)
+    public function createResult(DateDiffRequest $request)
     {
-        return call_user_func($this->formatCallback, $diffRequest);
+        return call_user_func($this->formatCallback, $request);
     }
 }

@@ -18,8 +18,8 @@ interface ConditionInterface
     public function isApplicable(DateDiffRequest $diffRequest);
 
     /**
-     * @param DateDiffRequest $diffRequest
+     * @param DateDiffRequest $request
      * @return DateDiffResult
      */
-    public function createResult(DateDiffRequest $diffRequest);
+    public function createResult(DateDiffRequest $request);
 }
