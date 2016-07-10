@@ -16,11 +16,16 @@ class TranslatorFormatter implements FormatterInterface
      * @var string
      */
     private $dateFormat;
+    /**
+     * @var string
+     */
+    private $domain;
 
-    public function __construct(TranslatorInterface $translatorInterface, $dateFormat = BasicFormatter::FULL_FORMAT)
+    public function __construct(TranslatorInterface $translatorInterface, $dateFormat = BasicFormatter::FULL_FORMAT, $domain = 'relative-date')
     {
         $this->translatorInterface = $translatorInterface;
         $this->setDateFormat($dateFormat);
+        $this->domain = $domain;
     }
 
     public function setDateFormat($dateFormat)
@@ -33,6 +38,11 @@ class TranslatorFormatter implements FormatterInterface
         if ($result->getKey() === DateDiffResult::FULL_DATE) {
             return $result->getRequest()->getDate()->format($this->dateFormat);
         }
-        return $this->translatorInterface->transChoice($result->getKey(), $result->getValue(), ['%count' => $result->getValue()]);
+        return $this->translatorInterface->transChoice(
+            $result->getKey(),
+            $result->getValue(),
+            ['%count' => $result->getValue()],
+            $this->domain
+        );
     }
 }
