@@ -20,6 +20,11 @@ class TranslatorFormatter implements FormatterInterface
     public function __construct(TranslatorInterface $translatorInterface, $dateFormat = BasicFormatter::FULL_FORMAT)
     {
         $this->translatorInterface = $translatorInterface;
+        $this->setDateFormat($dateFormat);
+    }
+
+    public function setDateFormat($dateFormat)
+    {
         $this->dateFormat = $dateFormat;
     }
 
