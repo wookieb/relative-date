@@ -17,11 +17,12 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     protected function createRequestForSeconds($seconds)
     {
         $interval = new \DateInterval('PT'.abs($seconds).'S');
+        $date = new \DateTimeImmutable('2015-01-01 00:00:00');
         if ($seconds < 0) {
-            $interval->invert = true;
+            $baseDate = $date->add($interval);
+        } else {
+            $baseDate = $date->sub($interval);
         }
-
-        $baseDate = new \DateTimeImmutable('2015-01-01 00:00:00');
-        return new DateDiffRequest($baseDate->add($interval), $baseDate);
+        return new DateDiffRequest($date, $baseDate);
     }
 }

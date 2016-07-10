@@ -15,8 +15,8 @@ class ResultsTest extends AbstractTest
     public function secondsAgoTestCases()
     {
         return [
-            [$this->createRequestForSeconds(5), 5],
-            [$this->createRequestForSeconds(100), 100],
+            [$this->createRequestForSeconds(-5), 5],
+            [$this->createRequestForSeconds(-100), 100],
         ];
     }
 
@@ -32,8 +32,8 @@ class ResultsTest extends AbstractTest
     {
         return [
             [$this->createRequestForSeconds(0), 0],
-            [$this->createRequestForSeconds(Unit::MINUTE * 10), 10],
-            [$this->createRequestForSeconds(Unit::MINUTE * 200), 200],
+            [$this->createRequestForSeconds(Unit::MINUTE * -10), 10],
+            [$this->createRequestForSeconds(Unit::MINUTE * -200), 200],
         ];
     }
 
@@ -49,8 +49,8 @@ class ResultsTest extends AbstractTest
     {
         return [
             [$this->createRequestForSeconds(0), 0],
-            [$this->createRequestForSeconds(Unit::HOUR * 10), 10],
-            [$this->createRequestForSeconds(Unit::HOUR * 200), 200],
+            [$this->createRequestForSeconds(Unit::HOUR * -10), 10],
+            [$this->createRequestForSeconds(Unit::HOUR * -200), 200],
         ];
     }
 
@@ -67,8 +67,8 @@ class ResultsTest extends AbstractTest
     {
         return [
             [$this->createRequestForSeconds(0), 0],
-            [$this->createRequestForSeconds(Unit::DAY * 10), 10],
-            [$this->createRequestForSeconds(Unit::DAY * 200), 200],
+            [$this->createRequestForSeconds(Unit::DAY * -10), 10],
+            [$this->createRequestForSeconds(Unit::DAY * -200), 200],
         ];
     }
 
@@ -84,8 +84,8 @@ class ResultsTest extends AbstractTest
     {
         return [
             [$this->createRequestForSeconds(0), 0],
-            [$this->createRequestForSeconds(Unit::WEEK * 10), 10],
-            [$this->createRequestForSeconds(Unit::WEEK * 200), 200],
+            [$this->createRequestForSeconds(Unit::WEEK * -10), 10],
+            [$this->createRequestForSeconds(Unit::WEEK * -200), 200],
         ];
     }
 
@@ -133,7 +133,7 @@ class ResultsTest extends AbstractTest
 
     public function testCreateFullDate()
     {
-        $this->assertDateDiffResult(DateDiffResult::FULL_DATE,null, Results::createFullDate($this->createRequestForSeconds(10)));
-        $this->assertDateDiffResult(DateDiffResult::FULL_DATE,null, Results::createFullDate($this->createRequestForSeconds(1000)));
+        $this->assertDateDiffResult(DateDiffResult::FULL_DATE, null, Results::createFullDate($this->createRequestForSeconds(10)));
+        $this->assertDateDiffResult(DateDiffResult::FULL_DATE, null, Results::createFullDate($this->createRequestForSeconds(1000)));
     }
 }

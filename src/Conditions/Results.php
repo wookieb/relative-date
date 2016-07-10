@@ -20,17 +20,17 @@ class Results
 
     public static function calculateSecondsAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::SECONDS_AGO, $request->getDiffInSeconds());
+        return new DateDiffResult($request, self::SECONDS_AGO, abs($request->getDiffInSeconds()));
     }
 
     public static function calculateMinutesAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::MINUTES_AGO, (int)floor($request->getDiffInSeconds() / Unit::MINUTE));
+        return new DateDiffResult($request, self::MINUTES_AGO, (int)floor(abs($request->getDiffInSeconds()) / Unit::MINUTE));
     }
 
     public static function calculateHoursAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::HOURS_AGO, (int)floor($request->getDiffInSeconds() / Unit::HOUR));
+        return new DateDiffResult($request, self::HOURS_AGO, (int)floor(abs($request->getDiffInSeconds()) / Unit::HOUR));
     }
 
     public static function calculateDaysAgo(DateDiffRequest $request)
