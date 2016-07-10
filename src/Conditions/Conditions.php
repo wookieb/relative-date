@@ -31,7 +31,7 @@ class Conditions extends StaticInstancesPool
     public static function minutesAgo()
     {
         return self::getOrCreate('minutes-ago', function () {
-            return R::createForNegativeValues(Unit::MINUTE, Unit::HOUR - 1, [Results::class, 'calculateMinutesAgo']);
+            return RangeCondition::createForNegativeValues(Unit::MINUTE, Unit::HOUR - 1, [Results::class, 'calculateMinutesAgo']);
         });
     }
 
