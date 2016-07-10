@@ -33,7 +33,7 @@ class Results
 
     public static function calculateDaysAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::DAYS_AGO, $request->getInterval()->m);
+        return new DateDiffResult($request, self::DAYS_AGO, $request->getInterval()->days);
     }
 
     public static function calculateWeeksAgo(DateDiffRequest $request)
