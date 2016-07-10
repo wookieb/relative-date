@@ -6,6 +6,8 @@ namespace Wookieb\Conditions;
 use Wookieb\DateDiffRequest;
 use Wookieb\DateDiffResult;
 
+use Wookieb\DateUnits as Unit;
+
 class Results
 {
     const SECONDS_AGO = '[X] seconds ago';
@@ -18,17 +20,17 @@ class Results
 
     public static function calculateSecondsAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::SECONDS_AGO, $request->getInterval()->s);
+        return new DateDiffResult($request, self::SECONDS_AGO, $request->getDiffInSeconds());
     }
 
     public static function calculateMinutesAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::MINUTES_AGO, $request->getInterval()->i);
+        return new DateDiffResult($request, self::MINUTES_AGO, (int)floor($request->getDiffInSeconds() / Unit::MINUTE));
     }
 
     public static function calculateHoursAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::HOURS_AGO, $request->getInterval()->h);
+        return new DateDiffResult($request, self::HOURS_AGO, (int)floor($request->getDiffInSeconds() / Unit::HOUR));
     }
 
     public static function calculateDaysAgo(DateDiffRequest $request)
@@ -38,7 +40,7 @@ class Results
 
     public static function calculateWeeksAgo(DateDiffRequest $request)
     {
-        return new DateDiffResult($request, self::WEEKS_AGO, floor($request->getInterval()->days / 7));
+        return new DateDiffResult($request, self::WEEKS_AGO, (int)floor($request->getInterval()->days / 7));
     }
 
     public static function calculateMonthsAgo(DateDiffRequest $request)
