@@ -16,7 +16,7 @@
 	}
   },
   "suggest": {
-	"symfony/translation": "Allow to format result using Translator",
+	"symfony/translation": "Allow to format result using Translator"
   },
   "minimum-stability": "stable",
   "require": {},
