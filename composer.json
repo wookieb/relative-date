@@ -11,8 +11,8 @@
   ],
   "autoload": {
 	"psr-4": {
-	  "Wookieb\\": "src",
-	  "Wookieb\\Tests\\": "tests"
+	  "Wookieb\\RelativeDate\\": "src",
+	  "Wookieb\\RelativeDate\\Tests\\": "tests"
 	}
   },
   "suggest": {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Wookieb\Conditions;
+namespace Wookieb\RelativeDate\Rules;
 
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
 
 /**
  * Produces "yesterday" if diff between days is one calendar day.
@@ -12,9 +12,9 @@ use Wookieb\DateDiffResult;
  * 2015-02-01 01:00:00 compared to 2015-01-01 18:00:00 is "yesterday" despite 7 hours diff
  * 2015-02-01 23:00:00 compared to 2015-01-01 01:00:00 is also "yesterday" despite 46 hours difference
  *
- * @package Wookieb\Conditions
+ * @package Wookieb\Rules
  */
-class YesterdayCondition implements ConditionInterface
+class YesterdayRule implements RuleInterface
 {
     const RESULT_NAME = 'yesterday';
 

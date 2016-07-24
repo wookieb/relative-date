@@ -1,6 +1,6 @@
 <?php
 
-namespace Wookieb;
+namespace Wookieb\RelativeDate;
 
 class DateUnits
 {

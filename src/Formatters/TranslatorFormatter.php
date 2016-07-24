@@ -1,10 +1,10 @@
 <?php
 
-namespace Wookieb\Formatters;
+namespace Wookieb\RelativeDate\Formatters;
 
 
 use Symfony\Component\Translation\TranslatorInterface;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\DateDiffResult;
 
 class TranslatorFormatter implements FormatterInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Wookieb\Formatters;
+namespace Wookieb\RelativeDate\Formatters;
 
 
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
 
 interface FormatterInterface
 {

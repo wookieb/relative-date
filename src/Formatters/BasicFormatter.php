@@ -1,10 +1,11 @@
 <?php
 
-namespace Wookieb\Formatters;
+namespace Wookieb\RelativeDate\Formatters;
 
 
-use Wookieb\Conditions\Results;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\Rules\Results;
+use Wookieb\RelativeDate\DateDiffResult;
+use Wookieb\RelativeDate\Rules\YesterdayRule;
 
 /**
  * Very basic formatter for english
@@ -49,6 +50,9 @@ class BasicFormatter implements FormatterInterface
 
             case Results::YEARS_AGO:
                 return $result->getValue() === 1 ? 'a year ago' : $this->interpolate($result);
+
+            case YesterdayRule::RESULT_NAME:
+                return 'yesterday';
 
             case DateDiffResult::FULL_DATE:
                 return $result->getRequest()->getDate()->format($this->dateFormat);

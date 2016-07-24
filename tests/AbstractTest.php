@@ -1,10 +1,10 @@
 <?php
 
-namespace Wookieb\Tests;
+namespace Wookieb\RelativeDate\Tests;
 
 
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
 
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {

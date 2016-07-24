@@ -1,19 +1,19 @@
 <?php
 
-namespace Wookieb\Tests\Conditions;
+namespace Wookieb\RelativeDate\Tests\Rules;
 
 
-use Wookieb\Conditions\RangeCondition;
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
-use Wookieb\Tests\AbstractTest;
+use Wookieb\RelativeDate\Rules\RangeRule;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
+use Wookieb\RelativeDate\Tests\AbstractTest;
 
-class RangeConditionTest extends AbstractTest
+class RangeRuleTest extends AbstractTest
 {
 
     public function testRangeChecking()
     {
-        $condition = new RangeCondition(-100, 100, function (DateDiffRequest $request) {
+        $condition = new RangeRule(-100, 100, function (DateDiffRequest $request) {
             return DateDiffResult::createFullDate($request);
         });
         $this->assertTrue($condition->isApplicable($this->createRequestForSeconds(5)));
@@ -27,7 +27,7 @@ class RangeConditionTest extends AbstractTest
     public function testCallsProvidedCallback()
     {
         $called = false;
-        $condition = new RangeCondition(-100, 100, function (DateDiffRequest $request) use (&$called) {
+        $condition = new RangeRule(-100, 100, function (DateDiffRequest $request) use (&$called) {
             $called = true;
             return new DateDiffResult($request, 'foo');
         });
@@ -42,12 +42,12 @@ class RangeConditionTest extends AbstractTest
     {
         $this->setExpectedExceptionRegExp(\InvalidArgumentException::class, '/^Format callback must be callable$/');
         /** @noinspection PhpParamsInspection */
-        new RangeCondition(0, 100, new \stdClass());
+        new RangeRule(0, 100, new \stdClass());
     }
 
     public function testCreatingForNegativeValues()
     {
-        $condition = RangeCondition::createForNegativeValues(10, 100, 'trim');
+        $condition = RangeRule::createForNegativeValues(10, 100, 'trim');
         $this->assertTrue($condition->isApplicable($this->createRequestForSeconds(-10)));
         $this->assertTrue($condition->isApplicable($this->createRequestForSeconds(-100)));
         $this->assertTrue($condition->isApplicable($this->createRequestForSeconds(-50)));

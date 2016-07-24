@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Wookieb\Conditions;
+namespace Wookieb\RelativeDate\Rules;
 
 
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
 
-interface ConditionInterface
+interface RuleInterface
 {
     /**
      * Returns true if current date interval satisfies condition rules

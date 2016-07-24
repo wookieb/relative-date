@@ -1,6 +1,6 @@
 <?php
 
-namespace Wookieb;
+namespace Wookieb\RelativeDate;
 
 
 class DateDiffRequest
@@ -23,6 +23,10 @@ class DateDiffRequest
      * @var int
      */
     private $diffInSeconds = 0;
+    /**
+     * @var int
+     */
+    private $calendarMonths;
 
     public function __construct(\DateTimeInterface $date, \DateTimeInterface $baseDate)
     {
@@ -30,6 +34,27 @@ class DateDiffRequest
         $this->baseDate = $baseDate;
         $this->interval = $date->diff($baseDate);
         $this->diffInSeconds = $date->format('U') - $baseDate->format('U');
+        $this->calendarMonths = $this->calculateCalendarMonths();
+    }
+
+    private function calculateCalendarMonths()
+    {
+        $months = ((int)$this->date->format('Y') - (int)$this->baseDate->format('Y')) * 12;
+        $months += (int)$this->date->format('m') - (int)$this->baseDate->format('m');
+        if ($this->date > $this->baseDate) {
+            return $months + ($this->date->format('d') < $this->baseDate->format('d') ? -1 : 0);
+        } else if ($this->date < $this->baseDate) {
+            return $months + ($this->date->format('d') > $this->baseDate->format('d') ? 1 : 0);
+        }
+        return $months;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCalendarMonths()
+    {
+        return $this->calendarMonths;
     }
 
     /**

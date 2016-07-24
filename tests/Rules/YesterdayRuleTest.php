@@ -1,14 +1,15 @@
 <?php
 
-namespace Wookieb\Tests\Conditions;
+namespace Wookieb\RelativeDate\Tests\Rules;
 
 use \DateTimeImmutable as D;
-use Wookieb\Conditions\YesterdayCondition;
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
-use Wookieb\Tests\AbstractTest;
+use Wookieb\RelativeDate\Rules\Rules;
+use Wookieb\RelativeDate\Rules\YesterdayRule;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
+use Wookieb\RelativeDate\Tests\AbstractTest;
 
-class YesterdayConditionTest extends AbstractTest
+class YesterdayRuleTest extends AbstractTest
 {
     public function cases()
     {
@@ -25,8 +26,16 @@ class YesterdayConditionTest extends AbstractTest
      */
     public function testAllFeatures(DateDiffRequest $request, $isApplicable)
     {
-        $condition = new YesterdayCondition();
+        $condition = new YesterdayRule();
         $this->assertSame($isApplicable, $condition->isApplicable($request));
-        $this->assertEquals(new DateDiffResult($request, YesterdayCondition::RESULT_NAME), $condition->createResult($request));
+        $this->assertEquals(new DateDiffResult($request, YesterdayRule::RESULT_NAME), $condition->createResult($request));
+    }
+
+    public function testCreatingRulesFromRulesClass()
+    {
+        $rule1 = Rules::yesterday();
+        $rule2 = Rules::yesterday();
+
+        $this->assertSame($rule1, $rule2, 'Rule object has ben created more than once');
     }
 }

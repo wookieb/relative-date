@@ -1,13 +1,13 @@
 <?php
 
-namespace Wookieb\Tests\Conditions;
+namespace Wookieb\RelativeDate\Tests\Rules;
 
 
-use Wookieb\Conditions\Results;
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
-use Wookieb\Tests\AbstractTest;
-use Wookieb\DateUnits as Unit;
+use Wookieb\RelativeDate\Rules\Results;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
+use Wookieb\RelativeDate\Tests\AbstractTest;
+use Wookieb\RelativeDate\DateUnits as Unit;
 use \DateTimeImmutable as D;
 
 class ResultsTest extends AbstractTest
@@ -103,6 +103,7 @@ class ResultsTest extends AbstractTest
             [new DateDiffRequest(new D('2015-01-01'), new D('2015-01-01')), 0],
             [new DateDiffRequest(new D('2015-01-01'), new D('2015-02-01')), 1],
             [new DateDiffRequest(new D('2015-01-01'), new D('2015-10-05')), 9],
+            [new DateDiffRequest(new D('2014-01-01'), new D('2015-10-05')), 21],
         ];
     }
 

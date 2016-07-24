@@ -1,16 +1,15 @@
 <?php
 
-namespace Wookieb\Calculators;
+namespace Wookieb\RelativeDate\Calculators;
 
 
-use Wookieb\Conditions\Conditions;
-use Wookieb\Conditions\RangeCondition;
-use Wookieb\Conditions\YesterdayCondition;
-use Wookieb\DateDiffCalculator;
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
-use Wookieb\DateUnits;
-use Wookieb\StaticInstancesPool;
+use Wookieb\RelativeDate\Rules\Rules;
+use Wookieb\RelativeDate\Rules\RangeRule;
+use Wookieb\RelativeDate\DateDiffCalculator;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
+use Wookieb\RelativeDate\DateUnits;
+use Wookieb\RelativeDate\StaticInstancesPool;
 
 class TimeAgoDateDiffCalculator extends StaticInstancesPool
 {
@@ -31,13 +30,13 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
     {
         return self::getOrCreate('full', function () {
             return new DateDiffCalculator([
-                Conditions::secondsAgo(),
-                Conditions::minutesAgo(),
-                Conditions::hoursAgo(),
-                Conditions::daysAgo(),
-                Conditions::weeksAgo(),
-                Conditions::monthsAgo(),
-                Conditions::yearsAgo()
+                Rules::secondsAgo(),
+                Rules::minutesAgo(),
+                Rules::hoursAgo(),
+                Rules::daysAgo(),
+                Rules::weeksAgo(),
+                Rules::monthsAgo(),
+                Rules::yearsAgo()
             ]);
         });
     }
@@ -59,15 +58,15 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
     {
         return self::getOrCreate('up-to-2-weeks', function () {
             return new DateDiffCalculator([
-                Conditions::secondsAgo(),
-                Conditions::minutesAgo(),
-                Conditions::yesterday(),
-                Conditions::hoursAgo(),
-                Conditions::daysAgo(),
-                new RangeCondition(10 * DateUnits::DAY, INF, function (DateDiffRequest $request) {
+                Rules::secondsAgo(),
+                Rules::minutesAgo(),
+                Rules::yesterday(),
+                Rules::hoursAgo(),
+                Rules::daysAgo(),
+                new RangeRule(10 * DateUnits::DAY, INF, function (DateDiffRequest $request) {
                     return DateDiffResult::createFullDate($request);
                 }),
-                Conditions::weeksAgo()
+                Rules::weeksAgo()
             ]);
         });
     }
@@ -84,10 +83,10 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
     {
         return self::getOrCreate('up-to-2-days', function () {
             return new DateDiffCalculator([
-                Conditions::secondsAgo(),
-                Conditions::minutesAgo(),
-                Conditions::yesterday(),
-                Conditions::hoursAgo()
+                Rules::secondsAgo(),
+                Rules::minutesAgo(),
+                Rules::yesterday(),
+                Rules::hoursAgo()
             ]);
         });
     }

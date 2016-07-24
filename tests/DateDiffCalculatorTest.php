@@ -1,15 +1,15 @@
 <?php
 
-namespace Wookieb\Tests;
+namespace Wookieb\RelativeDate\Tests;
 
 
-use Wookieb\Conditions\ConditionInterface;
-use Wookieb\DateDiffCalculator;
+use Wookieb\RelativeDate\Rules\RuleInterface;
+use Wookieb\RelativeDate\DateDiffCalculator;
 
-use Wookieb\DateDiffRequest as Req;
-use Wookieb\DateDiffResult as Res;
+use Wookieb\RelativeDate\DateDiffRequest as Req;
+use Wookieb\RelativeDate\DateDiffResult as Res;
 use \DateTimeImmutable as D;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\DateDiffResult;
 
 class DateDiffCalculatorTest extends AbstractTest
 {
@@ -37,7 +37,7 @@ class DateDiffCalculatorTest extends AbstractTest
 
     private function createCondition($isApplicableCallback, $createResultCallback)
     {
-        $condition = $this->getMockForAbstractClass(ConditionInterface::class);
+        $condition = $this->getMockForAbstractClass(RuleInterface::class);
 
         $condition->expects($this->any())
             ->method('isApplicable')

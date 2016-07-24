@@ -1,25 +1,25 @@
 <?php
 
-namespace Wookieb\Conditions;
+namespace Wookieb\RelativeDate\Rules;
 
 
-use Wookieb\Conditions\ConditionInterface;
-use Wookieb\DateDiffRequest;
-use Wookieb\DateDiffResult;
+use Wookieb\RelativeDate\Rules\RuleInterface;
+use Wookieb\RelativeDate\DateDiffRequest;
+use Wookieb\RelativeDate\DateDiffResult;
 
 /**
  * Produces the result created by $formatCallback only if the amount of seconds falls in a given range
  *
- * @package Wookieb\Conditions
+ * @package Wookieb\Rules
  */
-class RangeCondition implements ConditionInterface
+class RangeRule implements RuleInterface
 {
     private $min;
     private $max;
     private $formatCallback;
 
     /**
-     * RangeCondition constructor.
+     * RangeRule constructor.
      * @param int $min
      * @param int $max
      * @param callable $formatCallback
@@ -48,14 +48,14 @@ class RangeCondition implements ConditionInterface
      * Flips min and max range and converts them to negative number;
      *
      * <code>
-     * new RangeCondition(10, 100, ...); // 10 <= x <= 100
-     * RangeCondition::createForNegativeValues(10, 100, ...); // -100 <= x <= -10
+     * new RangeRule(10, 100, ...); // 10 <= x <= 100
+     * RangeRule::createForNegativeValues(10, 100, ...); // -100 <= x <= -10
      * </code>
      *
      * @param $min
      * @param $max
      * @param $formatCallback
-     * @return RangeCondition
+     * @return RangeRule
      */
     public static function createForNegativeValues($min, $max, $formatCallback)
     {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Wookieb;
+namespace Wookieb\RelativeDate;
 
 
-use Wookieb\Conditions\ConditionInterface;
-use Wookieb\Conditions\Results;
+use Wookieb\RelativeDate\Rules\RuleInterface;
+use Wookieb\RelativeDate\Rules\Results;
 
 class DateDiffCalculator
 {
     /**
-     * @var ConditionInterface[]
+     * @var RuleInterface[]
      */
     private $conditions;
 
@@ -20,7 +20,7 @@ class DateDiffCalculator
 
     /**
      * DateDiffCalculator constructor.
-     * @param ConditionInterface[] $conditions
+     * @param RuleInterface[] $conditions
      * @param callable $defaultResultCallback
      */
     public function __construct($conditions, $defaultResultCallback = [Results::class, 'createFullDate'])
