@@ -105,4 +105,11 @@ class Rules extends StaticInstancesPool
             return new YearsAgoRule();
         });
     }
+
+    public static function tomorrow() {
+        return self::getOrCreate('tomorrow', function() {
+            return new TomorrowRule();
+        });
+    }
+
 }

@@ -6,11 +6,11 @@ namespace Wookieb\RelativeDate;
 class DateDiffRequest
 {
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeImmutable
      */
     private $date;
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeImmutable
      */
     private $baseDate;
 
@@ -30,8 +30,8 @@ class DateDiffRequest
 
     public function __construct(\DateTimeInterface $date, \DateTimeInterface $baseDate)
     {
-        $this->date = $date;
-        $this->baseDate = $baseDate;
+        $this->date = $date instanceof \DateTime ? \DateTimeImmutable::createFromMutable($date) : $date;
+        $this->baseDate = $baseDate instanceof \DateTime ? \DateTimeImmutable::createFromMutable($baseDate) : $baseDate;
         $this->interval = $date->diff($baseDate);
         $this->diffInSeconds = $date->format('U') - $baseDate->format('U');
         $this->calendarMonths = $this->calculateCalendarMonths();
@@ -58,7 +58,7 @@ class DateDiffRequest
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeImmutable
      */
     public function getDate()
     {
@@ -66,7 +66,7 @@ class DateDiffRequest
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeImmutable
      */
     public function getBaseDate()
     {
@@ -81,6 +81,9 @@ class DateDiffRequest
         return $this->interval;
     }
 
+    /**
+     * @return int
+     */
     public function getDiffInSeconds()
     {
         return $this->diffInSeconds;

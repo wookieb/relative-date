@@ -7,8 +7,6 @@ use Wookieb\RelativeDate\DateDiffRequest;
 
 /**
  * Produces "years ago" for date difference greater or equal than one calendar year
- *
- * @package Wookieb\RelativeDate\Rules
  */
 class YearsAgoRule implements RuleInterface
 {
@@ -21,5 +19,4 @@ class YearsAgoRule implements RuleInterface
     {
         return Results::calculateYearsAgo($request);
     }
-
 }

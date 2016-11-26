@@ -6,8 +6,6 @@ use Wookieb\RelativeDate\DateDiffRequest;
 
 /**
  * Produces "months ago" for date difference if greater or equal than one calendar month to the past but less than one calendar year.
- *
- * @package Wookieb\RelativeDate\Rules
  */
 class MonthsAgoRule implements RuleInterface
 {
@@ -20,5 +18,4 @@ class MonthsAgoRule implements RuleInterface
     {
         return Results::calculateMonthsAgo($request);
     }
-
 }

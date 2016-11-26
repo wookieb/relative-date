@@ -9,8 +9,6 @@ use Wookieb\RelativeDate\DateDiffResult;
 
 /**
  * Produces the result created by $formatCallback only if the amount of seconds falls in a given range
- *
- * @package Wookieb\Rules
  */
 class RangeRule implements RuleInterface
 {

@@ -9,8 +9,6 @@ use Wookieb\RelativeDate\Rules\YesterdayRule;
 
 /**
  * Very basic formatter for english
- *
- * @package Wookieb\Formatters
  */
 class BasicFormatter implements FormatterInterface
 {

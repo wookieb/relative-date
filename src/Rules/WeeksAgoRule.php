@@ -7,8 +7,6 @@ use Wookieb\RelativeDate\DateDiffRequest;
 
 /**
  * Produces "weeks ago" for date difference greater or equal than 7 days to the past but less than one calendar month.
- *
- * @package Wookieb\RelativeDate\Rules
  */
 class WeeksAgoRule implements RuleInterface
 {

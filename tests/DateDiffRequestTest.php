@@ -59,4 +59,19 @@ class DateDiffRequestTest extends \PHPUnit_Framework_TestCase
         $request = new DateDiffRequest($date, $baseDate);
         $this->assertSame($expectedCalendarMonths, $request->getCalendarMonths());
     }
+
+    public function testConvertsDatesToImmutableVersion()
+    {
+        $baseDate = \DateTime::createFromFormat('U', 12345);
+        $date = \DateTime::createFromFormat('U', 12345678);
+        $request = new DateDiffRequest($date, $baseDate);
+
+        $this->assertInstanceOf(\DateTimeImmutable::class, $request->getBaseDate());
+        $this->assertSame($baseDate->getTimestamp(), $request->getBaseDate()->getTimestamp());
+        $this->assertEquals($baseDate->getTimezone(), $request->getBaseDate()->getTimezone());
+
+        $this->assertInstanceOf(\DateTimeImmutable::class, $request->getDate());
+        $this->assertSame($date->getTimestamp(), $request->getDate()->getTimestamp());
+        $this->assertEquals($date->getTimezone(), $request->getDate()->getTimezone());
+    }
 }
