@@ -5,6 +5,7 @@ namespace Wookieb\RelativeDate\Formatters;
 
 use Wookieb\RelativeDate\Rules\Results;
 use Wookieb\RelativeDate\DateDiffResult;
+use Wookieb\RelativeDate\Rules\TomorrowRule;
 use Wookieb\RelativeDate\Rules\YesterdayRule;
 
 /**
@@ -20,10 +21,12 @@ class BasicFormatter implements FormatterInterface
     const FULL_FORMAT = 'Y-m-d H:i:s';
     const SHORT_FORMAT = 'Y-m-d';
 
+
     public function __construct($dateFormat = self::FULL_FORMAT)
     {
         $this->dateFormat = $dateFormat;
     }
+
 
     public function format(DateDiffResult $result)
     {
@@ -49,11 +52,14 @@ class BasicFormatter implements FormatterInterface
             case Results::YEARS_AGO:
                 return $result->getValue() === 1 ? 'a year ago' : $this->interpolate($result);
 
+            case DateDiffResult::FULL_DATE:
+                return $result->getRequest()->getDate()->format($this->dateFormat);
+
             case YesterdayRule::RESULT_NAME:
                 return 'yesterday';
 
-            case DateDiffResult::FULL_DATE:
-                return $result->getRequest()->getDate()->format($this->dateFormat);
+            case TomorrowRule::RESULT_NAME:
+                return 'tomorrow';
         }
 
         throw new \InvalidArgumentException(sprintf('Unknown date diff result key "%s"', $result->getKey()));

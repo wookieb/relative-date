@@ -6,13 +6,13 @@ namespace Wookieb\RelativeDate\Tests\Rules\Formatters;
 use Wookieb\RelativeDate\DateDiffResult;
 use Wookieb\RelativeDate\Formatters\BasicFormatter;
 use Wookieb\RelativeDate\Rules\Results;
+use Wookieb\RelativeDate\Rules\TomorrowRule;
 use Wookieb\RelativeDate\Rules\YesterdayRule;
 
 class BasicFormatterTest extends AbstractFormattersTest
 {
     public function formattingCases()
     {
-        $currentDate = new \DateTimeImmutable();
 
         return [
             [$this->makeResult(Results::SECONDS_AGO, 1), 'few seconds ago'],
@@ -31,6 +31,7 @@ class BasicFormatterTest extends AbstractFormattersTest
             [$this->makeResult(Results::MONTHS_AGO, 5), '5 months ago'],
             [$this->makeResult(Results::YEARS_AGO, 1), 'a year ago'],
             [$this->makeResult(Results::YEARS_AGO, 5), '5 years ago'],
+            [$this->makeResult(TomorrowRule::RESULT_NAME), 'tomorrow']
         ];
     }
 
