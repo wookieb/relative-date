@@ -11,7 +11,7 @@ class MonthsAgoRule implements RuleInterface
 {
     public function isApplicable(DateDiffRequest $diffRequest)
     {
-        return $diffRequest->getCalendarMonths() < 0 && $diffRequest->getInterval()->y === 0;
+        return $diffRequest->getCalendarMonths() < 0;
     }
 
     public function createResult(DateDiffRequest $request)

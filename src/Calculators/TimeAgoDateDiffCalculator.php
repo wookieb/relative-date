@@ -30,13 +30,13 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
     {
         return self::getOrCreate('full', function () {
             return new DateDiffCalculator([
-                Rules::secondsAgo(),
-                Rules::minutesAgo(),
-                Rules::hoursAgo(),
-                Rules::daysAgo(),
-                Rules::weeksAgo(),
+                Rules::yearsAgo(),
                 Rules::monthsAgo(),
-                Rules::yearsAgo()
+                Rules::weeksAgo(),
+                Rules::daysAgo(),
+                Rules::hoursAgo(),
+                Rules::minutesAgo(),
+                Rules::secondsAgo()
             ]);
         });
     }
@@ -51,22 +51,21 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
      * - weeks (up to 14 days)
      * - full date
      *
-     * @see YesterdayCondition
      * @return DateDiffCalculator
      */
     public static function upTo2Weeks()
     {
         return self::getOrCreate('up-to-2-weeks', function () {
             return new DateDiffCalculator([
-                Rules::secondsAgo(),
-                Rules::minutesAgo(),
-                Rules::yesterday(),
-                Rules::hoursAgo(),
-                Rules::daysAgo(),
-                new RangeRule(10 * DateUnits::DAY, INF, function (DateDiffRequest $request) {
+                RangeRule::createForNegativeValues(2 * DateUnits::WEEK, INF, function (DateDiffRequest $request) {
                     return DateDiffResult::createFullDate($request);
                 }),
-                Rules::weeksAgo()
+                Rules::weeksAgo(),
+                Rules::yesterday(),
+                Rules::daysAgo(),
+                Rules::hoursAgo(),
+                Rules::minutesAgo(),
+                Rules::secondsAgo()
             ]);
         });
     }
@@ -78,17 +77,18 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
      * - "yesterday"
      * - hours
      * - full date
+     *
+     * @return DateDiffCalculator
      */
     public static function upTo2Days()
     {
         return self::getOrCreate('up-to-2-days', function () {
             return new DateDiffCalculator([
-                Rules::secondsAgo(),
-                Rules::minutesAgo(),
                 Rules::yesterday(),
-                Rules::hoursAgo()
+                Rules::hoursAgo(),
+                Rules::minutesAgo(),
+                Rules::secondsAgo()
             ]);
         });
     }
-
 }

@@ -13,7 +13,7 @@ class WeeksAgoRule implements RuleInterface
     public function isApplicable(DateDiffRequest $diffRequest)
     {
         $i = $diffRequest->getInterval();
-        return !$i->invert && $i->d >= 7 && $diffRequest->getCalendarMonths() === 0;
+        return !$i->invert && $i->d >= 7;
     }
 
     public function createResult(DateDiffRequest $request)

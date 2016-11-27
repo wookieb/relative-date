@@ -48,7 +48,6 @@ class Rules extends StaticInstancesPool
     }
 
     /**
-     * @see YesterdayCondition
      * @return YesterdayRule
      */
     public static function yesterday()
@@ -106,8 +105,9 @@ class Rules extends StaticInstancesPool
         });
     }
 
-    public static function tomorrow() {
-        return self::getOrCreate('tomorrow', function() {
+    public static function tomorrow()
+    {
+        return self::getOrCreate('tomorrow', function () {
             return new TomorrowRule();
         });
     }
