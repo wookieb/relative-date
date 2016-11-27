@@ -23,7 +23,7 @@ class DateDiffCalculator
      * @param RuleInterface[] $conditions
      * @param callable $defaultResultCallback
      */
-    public function __construct($conditions, $defaultResultCallback = [Results::class, 'createFullDate'])
+    public function __construct($conditions, $defaultResultCallback = [DateDiffResult::class, 'createFullDate'])
     {
         $this->conditions = $conditions;
         $this->defaultResultCallback = $defaultResultCallback;

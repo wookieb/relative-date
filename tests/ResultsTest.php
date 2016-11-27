@@ -131,10 +131,4 @@ class ResultsTest extends AbstractTest
     {
         $this->assertDateDiffResult(Results::YEARS_AGO, $expectedValue, Results::calculateYearsAgo($request));
     }
-
-    public function testCreateFullDate()
-    {
-        $this->assertDateDiffResult(DateDiffResult::FULL_DATE, null, Results::createFullDate($this->createRequestForSeconds(10)));
-        $this->assertDateDiffResult(DateDiffResult::FULL_DATE, null, Results::createFullDate($this->createRequestForSeconds(1000)));
-    }
 }

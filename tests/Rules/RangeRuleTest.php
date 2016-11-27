@@ -40,7 +40,7 @@ class RangeRuleTest extends AbstractTest
 
     public function testThrowsErrorForInvalidCallback()
     {
-        $this->setExpectedExceptionRegExp(\InvalidArgumentException::class, '/^Format callback must be callable$/');
+        $this->setExpectedExceptionRegExp(\InvalidArgumentException::class, '/^Result callback must be callable$/');
         /** @noinspection PhpParamsInspection */
         new RangeRule(0, 100, new \stdClass());
     }
