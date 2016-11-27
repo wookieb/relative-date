@@ -21,12 +21,10 @@ class BasicFormatter implements FormatterInterface
     const FULL_FORMAT = 'Y-m-d H:i:s';
     const SHORT_FORMAT = 'Y-m-d';
 
-
     public function __construct($dateFormat = self::FULL_FORMAT)
     {
         $this->dateFormat = $dateFormat;
     }
-
 
     public function format(DateDiffResult $result)
     {

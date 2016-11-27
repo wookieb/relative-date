@@ -25,7 +25,7 @@ $formatter = new Wookieb\RelativeDate\Formatters\BasicFormatter();
 $calculator = Wookieb\RelativeDate\Calculators\TimeAgoDateDiffCalculator::full();
 
 $date = new \DateTime('2016-01-01 14:00:00');
-$now = new \DateTime('2016-01-01 16:00:00');
+$now = new \DateTime('2016-01-01 16:00:00'); // not required, defaults to current date
 $formatter->format($calculator->compute($date, $now)); // 2 hours ago
 ```
 
@@ -81,4 +81,42 @@ Computes result in one of the units:
 * full date (if date is older than "yesterday")
 
 ## Customization
-TODO
+
+### Translator and custom placeholders
+By default TranslatorFormatter defines only one placeholder "%count%" for your translations.
+You can define custom ones, especially useful for more detailed final outputs.
+
+```php
+$translator = new TranslatorFormatter($translator);
+$translator->registerCustomPlaceholder(
+    ['yesterday', 'tomorrow'], // applies only to specific result key names
+    '%at%', // placeholder name
+    function(DateDiffResult $result) {
+        return $result->getRequest()
+            ->getDate()
+            ->format('H:i');
+    }
+);
+
+// translation definition
+tomorrow: tomorrow at %at%
+
+// usage
+$date = new \DateTime('2016-01-01 14:05:00');
+$baseDate = new \DateTime('2016-01-02 00:00:00');
+$result = $translator->format(TimeAgoCalculator::upTo2Weeks()->compute($date, $baseDate));
+$result; // yesterday at 14:05
+```
+
+### Custom full date format
+Every built-in Formatter supports date format string applied to results representing full date.
+
+````
+$format = Wookieb\RelativeDate\Formatters\BasicFormatter::SHORT_FORMAT; // Y-m-d
+$formatter = new Wookieb\RelativeDate\Formatters\BasicFormatter($format);
+$calculator = Wookieb\RelativeDate\Calculators\TimeAgoDateDiffCalculator::upTo2Weeks();
+
+$date = new \DateTime('2016-01-01 14:00:00');
+$now = new \DateTime('2016-03-01 16:00:00');
+$formatter->format($calculator->compute($date, $now)); // 2016-01-01
+```
