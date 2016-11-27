@@ -1,7 +1,6 @@
 <?php
 
-namespace Wookieb\RelativeDate\Tests\Rules\Rules;
-
+namespace Wookieb\RelativeDate\Tests\Rules;
 
 use Wookieb\RelativeDate\DateDiffRequest;
 use Wookieb\RelativeDate\DateDiffResult;
