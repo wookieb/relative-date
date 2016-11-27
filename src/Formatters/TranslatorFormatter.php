@@ -21,16 +21,34 @@ class TranslatorFormatter implements FormatterInterface
      */
     private $domain;
 
+    private $customPlaceholders = [];
+
     public function __construct(TranslatorInterface $translatorInterface, $dateFormat = BasicFormatter::FULL_FORMAT, $domain = 'relative-date')
     {
         $this->translatorInterface = $translatorInterface;
-        $this->setDateFormat($dateFormat);
+        $this->dateFormat = $dateFormat;
         $this->domain = $domain;
     }
 
-    public function setDateFormat($dateFormat)
+    /**
+     * Register custom placeholder generated just for particular result keys like ([X] months ago, yesterday, tomorrow]
+     *
+     * @param array $resultKeys
+     * @param string $placeholderName
+     * @param callable $placeholderFunction
+     */
+    public function registerCustomPlaceholder(array $resultKeys, $placeholderName, $placeholderFunction)
     {
-        $this->dateFormat = $dateFormat;
+        if (!is_callable($placeholderFunction, true)) {
+            throw new \InvalidArgumentException('Placeholder function is not callable');
+        }
+
+        foreach ($resultKeys as $resultKey) {
+            if (!isset($this->customPlaceholders[$resultKey])) {
+                $this->customPlaceholders[$resultKey] = [];
+            }
+            $this->customPlaceholders[$resultKey][$placeholderName] = $placeholderFunction;
+        }
     }
 
     public function format(DateDiffResult $result)
@@ -41,8 +59,20 @@ class TranslatorFormatter implements FormatterInterface
         return $this->translatorInterface->transChoice(
             $result->getKey(),
             $result->getValue(),
-            ['%count' => $result->getValue()],
+            $this->getPlaceholders($result),
             $this->domain
         );
+    }
+
+    private function getPlaceholders(DateDiffResult $result)
+    {
+        $placeholders = ['%count%' => $result->getValue()];
+        if (isset($this->customPlaceholders[$result->getKey()])) {
+            $customPlaceholders = $this->customPlaceholders[$result->getKey()];
+            foreach ($customPlaceholders as $customPlaceholder => $customPlaceholderFunction) {
+                $placeholders[$customPlaceholder] = call_user_func($customPlaceholderFunction, $result);
+            }
+        }
+        return $placeholders;
     }
 }
