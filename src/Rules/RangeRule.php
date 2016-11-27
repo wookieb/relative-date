@@ -8,7 +8,7 @@ use Wookieb\RelativeDate\DateDiffRequest;
 use Wookieb\RelativeDate\DateDiffResult;
 
 /**
- * Produces the result created by $formatCallback only if the amount of seconds falls in a given range
+ * Produces the result created by $resultCallback only if the amount of seconds falls in a given range
  */
 class RangeRule implements RuleInterface
 {
@@ -27,7 +27,7 @@ class RangeRule implements RuleInterface
         $this->min = $min;
         $this->max = $max;
         if (!is_callable($resultCallback)) {
-            throw new \InvalidArgumentException('Format callback must be callable');
+            throw new \InvalidArgumentException('Result callback must be callable');
         }
         $this->resultCallback = $resultCallback;
     }
