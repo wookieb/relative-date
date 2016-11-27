@@ -14,22 +14,22 @@ class RangeRule implements RuleInterface
 {
     private $min;
     private $max;
-    private $formatCallback;
+    private $resultCallback;
 
     /**
      * RangeRule constructor.
      * @param int $min
      * @param int $max
-     * @param callable $formatCallback
+     * @param callable $resultCallback
      */
-    public function __construct($min, $max, $formatCallback)
+    public function __construct($min, $max, $resultCallback)
     {
         $this->min = $min;
         $this->max = $max;
-        if (!is_callable($formatCallback)) {
+        if (!is_callable($resultCallback)) {
             throw new \InvalidArgumentException('Format callback must be callable');
         }
-        $this->formatCallback = $formatCallback;
+        $this->resultCallback = $resultCallback;
     }
 
     public function isApplicable(DateDiffRequest $diffRequest)
@@ -39,7 +39,7 @@ class RangeRule implements RuleInterface
 
     public function createResult(DateDiffRequest $request)
     {
-        return call_user_func($this->formatCallback, $request);
+        return call_user_func($this->resultCallback, $request);
     }
 
     /**
@@ -52,11 +52,11 @@ class RangeRule implements RuleInterface
      *
      * @param $min
      * @param $max
-     * @param $formatCallback
+     * @param $resultCallback
      * @return RangeRule
      */
-    public static function createForNegativeValues($min, $max, $formatCallback)
+    public static function createForNegativeValues($min, $max, $resultCallback)
     {
-        return new self(-$max, -$min, $formatCallback);
+        return new self(-$max, -$min, $resultCallback);
     }
 }

@@ -11,7 +11,7 @@ use Wookieb\RelativeDate\DateDiffResult;
 use Wookieb\RelativeDate\DateUnits;
 use Wookieb\RelativeDate\StaticInstancesPool;
 
-class TimeAgoDateDiffCalculator extends StaticInstancesPool
+class TimeAgoCalculator extends StaticInstancesPool
 {
     protected static $instances = [];
 
@@ -24,6 +24,7 @@ class TimeAgoDateDiffCalculator extends StaticInstancesPool
      * - weeks
      * - months
      * - years
+     *
      * @return DateDiffCalculator
      */
     public static function full()

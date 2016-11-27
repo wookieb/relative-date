@@ -2,14 +2,14 @@
 
 namespace Wookieb\RelativeDate\Tests\Calculators;
 
-use Wookieb\RelativeDate\Calculators\TimeAgoDateDiffCalculator;
+use Wookieb\RelativeDate\Calculators\TimeAgoCalculator;
 use Wookieb\RelativeDate\DateDiffRequest;
 use Wookieb\RelativeDate\DateDiffResult;
 use Wookieb\RelativeDate\Rules\Results;
 use Wookieb\RelativeDate\Rules\YesterdayRule;
 use Wookieb\RelativeDate\Tests\AbstractTest;
 
-class TimeAgoDateDiffCalculatorTest extends AbstractTest
+class TimeAgoCalculatorTest extends AbstractTest
 {
     private function createCase($date, $baseDate, $resultKey, $resultValue = null)
     {
@@ -77,7 +77,7 @@ class TimeAgoDateDiffCalculatorTest extends AbstractTest
      */
     public function testFullCalculator(\DateTimeInterface $date, \DateTimeInterface $baseDate, DateDiffResult $expectedResult)
     {
-        $calculator = TimeAgoDateDiffCalculator::full();
+        $calculator = TimeAgoCalculator::full();
         $result = $calculator->compute($date, $baseDate);
         $this->assertEquals($expectedResult, $result);
     }
@@ -101,7 +101,7 @@ class TimeAgoDateDiffCalculatorTest extends AbstractTest
      */
     public function testUpTo2WeeksCalculator(\DateTimeInterface $date, \DateTimeInterface $baseDate, DateDiffResult $expectedResult)
     {
-        $calculator = TimeAgoDateDiffCalculator::upTo2Weeks();
+        $calculator = TimeAgoCalculator::upTo2Weeks();
         $result = $calculator->compute($date, $baseDate);
         $this->assertEquals($expectedResult, $result);
     }
@@ -123,7 +123,7 @@ class TimeAgoDateDiffCalculatorTest extends AbstractTest
      */
     public function testUpTo2DaysCalculator(\DateTimeInterface $date, \DateTimeInterface $baseDate, DateDiffResult $expectedResult)
     {
-        $calculator = TimeAgoDateDiffCalculator::upTo2Days();
+        $calculator = TimeAgoCalculator::upTo2Days();
         $result = $calculator->compute($date, $baseDate);
         $this->assertEquals($expectedResult, $result);
     }
